@@ -10,6 +10,25 @@
         var WORDS     = ["booger", "apple", "hackbright", "mango", "house", "pineapple", "melon"];
         var SCRAMBLED = ["oogreb", "papel", "backrhight", "goman", "ushoe", "plainepep", "lemon"];
 
+        function scramble(word){
+            var token = [];
+            // tokenizes word into array
+            for (var i=0; i < word.length; i++){
+                token.push(word[i]);
+            }
+            var scrambled_token = [];
+            // pulls a random letter from tokenized array and appends it to scrambled token then removes it from the tokenized array.
+            while (token.length > 0){
+                var index = Math.floor(Math.random() * (token.length));
+                var letter = token[index];
+                scrambled_token.push(letter);
+                index.splice(index, 1);
+            }
+            newWord=scrambled_token.join();
+            scrambledWord=newWord.strip(",");
+            return scrambledWord;
+        }
+
         var playing = true;
 
         while (playing) {
@@ -24,6 +43,7 @@
             // prompt the user to guess the original word when given the scrambled word
             
             var guess = prompt("What is this word: " + scramble + "?");
+            guess = guess.trim().toLowerCase();
             // If the user guesses wrong, tell them they were wrong and the right word.
             if (guess !== word){
                 alert("You are wrong. The word is " + word + ".");
